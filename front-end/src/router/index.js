@@ -6,7 +6,16 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    async beforeEnter(to, from, next) {
+      try {
+        // Grab data from store
+        // If logged in === true and user exists
+        next();
+      } catch (e) {
+        next('/login');
+      }
+    }
   },
   {
     path: '/login',
