@@ -1,7 +1,10 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav
+    class="navbar navbar-expand-md navbar-light"
+    style="background-color: #fff2bd;"
+  >
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <h3 class="navbar-brand">My BBQ Recipes</h3>
       <button
         class="navbar-toggler"
         type="button"
@@ -14,18 +17,16 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
+        <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <router-link to="/">Home</router-link>
+            <button class="btn login-btn">
+              <router-link to="/login">Sign In</router-link>
+            </button>
           </li>
           <li class="nav-item">
-            <router-link to="/login">Login</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/register">Register</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/logout">Logout</router-link>
+            <button class="btn register-btn">
+              <router-link to="/register">Sign Up</router-link>
+            </button>
           </li>
         </ul>
       </div>
@@ -39,4 +40,12 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.login-btn {
+  color: #383637 !important;
+}
+
+.register-btn {
+  border: 1px solid #383637 !important;
+}
+</style>

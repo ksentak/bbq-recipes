@@ -61,7 +61,7 @@ export default {
   padding: 0;
   justify-content: center;
   align-items: center;
-  background-color: orange;
+  background-color: #ff590b;
   margin-top: 4rem;
   border-radius: 0.5rem;
 }
