@@ -4,31 +4,29 @@ import Home from '../views/Home.vue';
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
-    async beforeEnter(to, from, next) {
-      try {
-        // Grab data from store
-        // If logged in === true and user exists
-        next();
-      } catch (e) {
-        next('/login');
-      }
-    }
+    name: 'home',
+    component: Home
+    // async beforeEnter(to, from, next) {
+    //   try {
+    //     if (this.$store.state.user !== null) next();
+    //   } catch (e) {
+    //     next('/login');
+    //   }
+    // }
   },
   {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     component: () => import('@/views/Login.vue')
   },
   {
     path: '/register',
-    name: 'Register',
+    name: 'register',
     component: () => import('@/views/Register.vue')
   },
   {
     path: '/dashboard',
-    name: 'Dashboard',
+    name: 'dashboard',
     component: () => import('@/views/Dashboard.vue')
   }
 ];

@@ -17,7 +17,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
+        <ul v-if="user === null" class="navbar-nav ms-auto">
           <li class="nav-item">
             <button class="btn login-btn">
               <router-link to="/login">Sign In</router-link>
@@ -29,14 +29,34 @@
             </button>
           </li>
         </ul>
+
+        <ul v-else class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <button @click="logout" class="btn logout-btn">
+              Logout
+            </button>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  computed: {
+    ...mapGetters({
+      user: 'getUser'
+    })
+  },
+  methods: {
+    async logout() {
+      await this.$store.dispatch('logout');
+    }
+  }
 };
 </script>
 

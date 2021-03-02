@@ -4,13 +4,14 @@
       <div class="login-header">
         <h1>My BBQ Recipes</h1>
       </div>
-      <form @submit.prevent="login()">
+      <form @submit.prevent="login">
+        <span v-if="errorMessage">{{ errorMessage }}</span>
         <div class="row formRow1">
           <div class="col-10 offset-1">
             <input
+              v-model="email"
               type="email"
               name="email"
-              v-model="email"
               class="form-control py-2"
               placeholder="Email address"
             />
@@ -19,8 +20,8 @@
         <div class="row formRow2">
           <div class="col-10 offset-1">
             <input
-              type="password"
               v-model="password"
+              type="password"
               name="password"
               class="form-control py-2"
               placeholder="Password"
@@ -38,6 +39,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Login',
   data() {
@@ -46,9 +49,18 @@ export default {
       password: ''
     };
   },
+  computed: {
+    ...mapGetters({
+      errorMessage: 'getAuthError'
+    })
+  },
   methods: {
-    login() {
-      console.log(this.email, this.password);
+    async login() {
+      const user = {
+        email: this.email,
+        password: this.password
+      };
+      await this.$store.dispatch('signUserIn', user);
     }
   }
 };
