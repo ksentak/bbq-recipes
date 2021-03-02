@@ -5,6 +5,7 @@
         <h3 class="text-center mt-3">Register for an account</h3>
       </div>
       <form @submit.prevent="createUser">
+        <span v-if="errorMessage">{{ errorMessage }}</span>
         <div class="row formRow1">
           <div class="col-10 offset-1">
             <input
@@ -38,6 +39,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Register',
   data() {
@@ -45,6 +48,11 @@ export default {
       newUserEmail: '',
       newUserPassword: ''
     };
+  },
+  computed: {
+    ...mapGetters({
+      errorMessage: 'getAuthError'
+    })
   },
   methods: {
     async createUser() {

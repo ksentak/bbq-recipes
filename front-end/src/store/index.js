@@ -4,10 +4,12 @@ import 'firebase/auth';
 
 export default createStore({
   state: {
-    user: {}
+    user: {},
+    authError: ''
   },
   mutations: {
-    setUser: (state, user) => (state.user = user)
+    setUser: (state, user) => (state.user = user),
+    setAuthError: (state, error) => (state.authError = error)
   },
   actions: {
     async createUser({ commit }, user) {
@@ -18,12 +20,13 @@ export default createStore({
         const userCredential = await firebase
           .auth()
           .createUserWithEmailAndPassword(email, password);
-        console.log(userCredential);
-        commit('setUser', user);
+        commit('setUser', userCredential.user);
       } catch (e) {
-        console.log(e);
+        commit('setAuthError', e.message);
       }
     }
   },
-  modules: {}
+  getters: {
+    getAuthError: (state) => state.authError
+  }
 });
